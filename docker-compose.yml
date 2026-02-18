@@ -12,7 +12,9 @@ services:
     depends_on:
       - redis
     environment:
-      - REDIS_URL=redis://redis:6379/0
+      #- REDIS_URL=redis://redis:6379/0
+        REDIS_URL: redis://redis:6379/0
+        BACKEND_PORT: 8000
     
   celery:
     build:
@@ -21,7 +23,8 @@ services:
     depends_on:
       - redis
     environment:
-      - REDIS_URL=redis://redis:6379/0
+        #- REDIS_URL=redis://redis:6379/0
+        REDIS_URL: redis://redis:6379/0
     
 
   frontend:
@@ -32,6 +35,8 @@ services:
       - "3000:3000"
     depends_on:
       - backend
+    environment: #added
+      API_BASE: http://backend:8000
 
 
   

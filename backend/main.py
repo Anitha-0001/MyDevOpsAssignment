@@ -1,3 +1,4 @@
+import os
 from fastapi import FastAPI
 from celery.result import AsyncResult
 from worker import write_log_celery
@@ -12,7 +13,7 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
+BACKEND_PORT = int(os.getenv("BACKEND_PORT", 8000))
 
 @app.post("/notify/")
 async def notify_user(email: str):
