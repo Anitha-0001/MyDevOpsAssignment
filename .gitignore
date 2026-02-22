@@ -1,1 +1,8 @@
-venv
+venv*.tfstate*
+# Terraform state files
+*.tfstate
+*.tfstate.*
+
+# Ignore Terraform local binaries
+.terraform/
+.terraform.lock.hcl
