@@ -1,28 +1,21 @@
 import os
-from celery import Celery
+import logging
 import time
+from celery import Celery
 
-'''
-# Configure Celery to use Redis as the message broker
-celery = Celery(
-    "worker",  # This is the name of your Celery application
-    broker="redis://redis:6379/0",  # This is the Redis connection string
-    backend="redis://redis:6379/0",  # for storing task results
-)
-'''
 
-REDIS_URL = os.getenv("REDIS_URL", "redis://redis:6379/0")
 
-celery = Celery(
-    "worker",
-    broker=REDIS_URL,
-    backend=REDIS_URL,
-)
+REDIS_URL = os.getenv("REDIS_URL", "redis://task-redis.bzjzq4.0001.aps1.cache.amazonaws.com:6379/0")
 
+celery = Celery("worker", broker=REDIS_URL, backend=REDIS_URL)
+celery.conf.broker_connection_retry_on_startup = True
+
+logger = logging.getLogger(__name__)
+logging.basicConfig(level=logging.INFO)
 
 @celery.task
 def write_log_celery(message: str):
     time.sleep(10)
-    with open("log_celery.txt", "a") as f:
-        f.write(f"{message}\n")
+    logger.info(f"[CELERY TASK] {message}")
     return f"Task completed: {message}"
+
