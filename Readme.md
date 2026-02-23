@@ -247,7 +247,7 @@ frontend-service
 
 backend-service
 
-worker-service
+celery-service
 
 <img width="700" height="500" alt="Screenshot (18)" src="https://github.com/user-attachments/assets/e1941e86-4f87-4e75-b374-6d36fc22feb6" />
 
@@ -359,3 +359,4 @@ User triggers a task → Backend processes it → Frontend shows real-time statu
 
 
 **This project was not just coding - it was learning the full DevOps journey, from local containers to cloud deployment, monitoring, and troubleshooting.**
+
