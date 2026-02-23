@@ -17,9 +17,13 @@ DevOps focuses on automation, scalability, reliability, and rapid delivery. This
 
 - Worker Service (Async processing)
 
-  Logical Architecture: User → ALB → Frontend → Backend → Worker → Status API → Frontend
+ **Logical Architecture: User → ALB → Frontend → Backend → Worker → Status API → Frontend**
 
+ 
 **Architecture Diagram:**
+
+
+<img width="900" height="600" alt="Architecture (2)" src="https://github.com/user-attachments/assets/55f277cd-217b-4766-9286-9d091030ee17" />
 
 
 ---
@@ -73,7 +77,9 @@ This Microservices architecture enables Containerized services, Event-driven tas
 
 5) Serve frontend: simply open index.html in browser.
 
+
 Output:
+
 
 <img width="1000" height="600" alt="Screenshot 2026-02-18 011927" src="https://github.com/user-attachments/assets/1edf9a18-6375-4c03-8ebd-70eb3f735c4e" />
 
@@ -94,6 +100,8 @@ Frontend → HTTP Static server container
 Worker → Background processing container
 
 `docker-compose up --build`
+
+
 
 Outputs:
 
@@ -170,6 +178,8 @@ CloudWatch → Logging → Collects logs for monitoring and debugging.
 
 
 
+
+
 <img width="500" height="300" alt="Screenshot (9)" src="https://github.com/user-attachments/assets/7f113183-d992-486a-b018-3b87202f83a2" /> <img width="500" height="300" alt="Screenshot (11)" src="https://github.com/user-attachments/assets/2683bfb1-ccbf-42d0-953c-c2d05f1bfa86" />
 
 
@@ -207,6 +217,8 @@ Listener Rules → Route requests based on URL paths.
 
 
 
+
+
 <img width="700" height="500" alt="Screenshot (7)" src="https://github.com/user-attachments/assets/75c0b8d9-39b3-43b1-97d8-a6ee5dc707d4" />
 
 ---
@@ -228,6 +240,8 @@ Listener Rules → Route requests based on URL paths.
 ## ECS Design
 
 **Services:**
+
+ECS Services Orchestrates and maintains healthy, scalable container workloads.
 
 frontend-service
 
@@ -253,7 +267,7 @@ ECS in private subnets
 
 ## CI/CD Pipeline (Planned Implementation)
 
-**CI/CD enables automated build, test, image creation, and deployment pipelines for continuous delivery of the application.**
+CI/CD enables automated build, test, image creation, and deployment pipelines for continuous delivery of the application.
 
 Source Control (GitHub) → Centralized version control for code management.
 
@@ -275,7 +289,7 @@ Deployment Strategy → Supports rolling or blue-green deployments.
 
 ## CloudWatch Logs:
 
-**Observability is critical in distributed systems for reliability and root cause analysis.**
+Observability is critical in distributed systems for reliability and root cause analysis.
 
 /ecs/frontend
 
@@ -290,6 +304,8 @@ Deployment Strategy → Supports rolling or blue-green deployments.
 ## Errors & Debugging
 
 **Issues:**
+
+Following are the error i have faced during the cloud deployment:
 
 501 errors
 
@@ -309,6 +325,8 @@ Target group health issues
 
 
 **Debugging Tools:**
+
+CloudWatch, ECS Events, ALB health checks, and Terraform state collectively enable full-stack observability, service-level diagnostics, infrastructure validation, and rapid root-cause analysis across the application and cloud resources.
 
 CloudWatch
 
