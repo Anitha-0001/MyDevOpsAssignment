@@ -75,7 +75,7 @@ This Microservices architecture enables Containerized services, Event-driven tas
 
 Output:
 
-<img width="1409" height="777" alt="Screenshot 2026-02-18 011927" src="https://github.com/user-attachments/assets/1edf9a18-6375-4c03-8ebd-70eb3f735c4e" />
+<img width="1000" height="600" alt="Screenshot 2026-02-18 011927" src="https://github.com/user-attachments/assets/1edf9a18-6375-4c03-8ebd-70eb3f735c4e" />
 
 
 ---
@@ -97,7 +97,7 @@ Worker → Background processing container
 
 Outputs:
 
-<img width="600" height="700" alt="Screenshot 2026-02-23 003628" src="https://github.com/user-attachments/assets/408d6222-e8ae-4ee9-864e-af832dfe3bc4" /> <img width="400" height="400" alt="Screenshot 2026-02-18 124120" src="https://github.com/user-attachments/assets/92b4fdbf-dcbc-4e07-9ba7-4bec7b549d42" />
+<img width="500" height="600" alt="Screenshot 2026-02-23 003628" src="https://github.com/user-attachments/assets/408d6222-e8ae-4ee9-864e-af832dfe3bc4" /> <img width="400" height="400" alt="Screenshot 2026-02-18 124120" src="https://github.com/user-attachments/assets/92b4fdbf-dcbc-4e07-9ba7-4bec7b549d42" />
 
 
 ---
@@ -154,7 +154,7 @@ CloudWatch → Logging → Collects logs for monitoring and debugging.
 
 **Steps: Build → Tag → Push → Deploy**
 
-`docker build -t frontend-merged:latest ./frontend`
+`docker build -t frontend:latest ./frontend`
 
 `docker build -t backend-merged:latest ./backend` 
 
@@ -162,11 +162,15 @@ CloudWatch → Logging → Collects logs for monitoring and debugging.
 
 `aws ecr create-repository --repository-name backend`
 
-`aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin <AWS_ACCOUNT_ID>.dkr.ecr.ap-south-1.amazonaws.com`
+`aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin 758604744414.dkr.ecr.ap-south-1.amazonaws.com`
 
-`docker tag frontend-merged:latest <AWS_ACCOUNT_ID>.dkr.ecr.ap-south-1.amazonaws.com/frontend:latest`
+`docker tag frontend-merged:latest 758604744414.dkr.ecr.ap-south-1.amazonaws.com/frontend:latest`
 
-`docker push <AWS_ACCOUNT_ID>.dkr.ecr.ap-south-1.amazonaws.com/frontend:latest`
+`docker push 758604744414.dkr.ecr.ap-south-1.amazonaws.com/frontend:latest`
+
+
+
+<img width="500" height="300" alt="Screenshot (9)" src="https://github.com/user-attachments/assets/7f113183-d992-486a-b018-3b87202f83a2" /> <img width="500" height="300" alt="Screenshot (11)" src="https://github.com/user-attachments/assets/2683bfb1-ccbf-42d0-953c-c2d05f1bfa86" />
 
 
 ---
@@ -199,21 +203,26 @@ Listener Rules → Route requests based on URL paths.
 
 `terraform apply`
 
+`terraform output`
+
+
+
+<img width="700" height="500" alt="Screenshot (7)" src="https://github.com/user-attachments/assets/75c0b8d9-39b3-43b1-97d8-a6ee5dc707d4" />
 
 ---
 
 
 ## ALB Routing Rules
 
-/ → Frontend
+`/` → Frontend
 
-/api/* → Backend
+`/api/*` → Backend
 
-/notify/* → Backend
+`/notify/*` → Backend
 
-/taskstatus/* → Backend
+`/taskstatus/*` → Backend
 
-/health → Backend
+`/health` → Backend
 
 
 ## ECS Design
@@ -226,12 +235,17 @@ backend-service
 
 worker-service
 
+<img width="700" height="500" alt="Screenshot (18)" src="https://github.com/user-attachments/assets/e1941e86-4f87-4e75-b374-6d36fc22feb6" />
+
 
 **Networking:**
 
 ALB in public subnet
 
 ECS in private subnets
+
+
+<img width="700" height="500" alt="Screenshot 2026-02-21 000609" src="https://github.com/user-attachments/assets/c5595935-5f34-45ed-bb57-ae55b4494e07" />
 
 
 ---
@@ -269,6 +283,9 @@ Deployment Strategy → Supports rolling or blue-green deployments.
 
 /ecs/celery
 
+<img width="700" height="500" alt="Screenshot 2026-02-19 144041" src="https://github.com/user-attachments/assets/040b5af1-cc94-42e9-a049-fe9208ec4fec" />
+
+
 
 ## Errors & Debugging
 
@@ -284,6 +301,13 @@ ALB routing errors
 
 Target group health issues
 
+<img width="500" height="300" alt="Screenshot 2026-02-22 200923" src="https://github.com/user-attachments/assets/10354c89-50ce-4833-a0b5-905976358a12" />
+<img width="500" height="300" alt="Screenshot 2026-02-21 180926" src="https://github.com/user-attachments/assets/cf72e20a-2531-465d-be22-452bb3597e1e" />
+<img width="500" height="300" alt="Screenshot 2026-02-22 201230" src="https://github.com/user-attachments/assets/289dddb8-402b-4d82-9579-56a4e76c466b" />
+<img width="500" height="300" alt="Screenshot 2026-02-19 040937" src="https://github.com/user-attachments/assets/44f47512-8261-49ed-93f0-774683119893" />
+
+
+
 **Debugging Tools:**
 
 CloudWatch
@@ -295,6 +319,13 @@ ALB health checks
 Terraform state
 
 
+<img width="500" height="300" alt="Screenshot (24)" src="https://github.com/user-attachments/assets/fd855ec8-aaae-464c-9401-cf96bb11877e" />
+<img width="500" height="300" alt="Screenshot (27)" src="https://github.com/user-attachments/assets/36296f61-fc7e-4d9f-8039-6f97d979cb17" />
+<img width="500" height="300" alt="Screenshot (26)" src="https://github.com/user-attachments/assets/511080a6-4e1a-4047-b2f2-d7d9bd6fc620" />
+<img width="500" height="300" alt="Screenshot (28)" src="https://github.com/user-attachments/assets/07302e9a-f6ce-4af2-9d3c-bcb95a7fe568" />
+
+
+
 ---
 
 
@@ -302,5 +333,11 @@ Terraform state
 
 The Task Notifier project successfully demonstrates a multi-tier web application deployed on the cloud. End-to-end workflow achieved.
 User triggers a task → Backend processes it → Frontend shows real-time status.
+
+**Final Outputs:**
+
+<img width="500" height="300" alt="Screenshot (29)" src="https://github.com/user-attachments/assets/70f33543-f326-4703-ad60-26350ac4464d" />
+<img width="500" height="300" alt="Screenshot (30)" src="https://github.com/user-attachments/assets/decc9a2a-0908-41ca-a684-06ab17063bbf" />
+
 
 **This project was not just coding - it was learning the full DevOps journey, from local containers to cloud deployment, monitoring, and troubleshooting.**
