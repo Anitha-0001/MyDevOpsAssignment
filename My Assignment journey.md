@@ -247,7 +247,7 @@ frontend-service
 
 backend-service
 
-worker-service
+celery-service
 
 <img width="700" height="500" alt="Screenshot (18)" src="https://github.com/user-attachments/assets/e1941e86-4f87-4e75-b374-6d36fc22feb6" />
 
